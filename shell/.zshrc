@@ -29,6 +29,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gc='git commit'
 alias gp='git push'
+alias lg='lazygit'
 
 # nvm (installed by bootstrap.sh)
 export NVM_DIR="$HOME/.nvm"
@@ -37,6 +38,28 @@ export NVM_DIR="$HOME/.nvm"
 # Starship prompt (installed by bootstrap.sh)
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
+fi
+
+# fzf fuzzy finder (Ctrl+R history, Ctrl+T files, Alt+C cd) (installed by bootstrap.sh)
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --zsh)"
+fi
+
+# zoxide: smarter cd that jumps to frecent dirs (installed by bootstrap.sh)
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+  alias cd='z'
+fi
+
+# direnv: per-project env vars from .envrc (installed by bootstrap.sh)
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+# atuin: synced shell history across machines (installed by bootstrap.sh)
+# One-time setup: run 'atuin register' (or 'atuin login') interactively first.
+if command -v atuin >/dev/null 2>&1; then
+  eval "$(atuin init zsh)"
 fi
 
 # Auto-attach tmux on interactive SSH login (skip if already inside tmux)
