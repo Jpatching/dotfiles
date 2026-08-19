@@ -66,3 +66,5 @@ fi
 if [ -z "$TMUX" ] && [ -n "$SSH_CONNECTION" ] && [ -t 1 ]; then
   tmux new -As main
 fi
+
+
