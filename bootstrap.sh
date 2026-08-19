@@ -46,11 +46,8 @@ nvm install --lts >/dev/null
 
 echo "==> Installing starship prompt"
 if ! command -v starship >/dev/null 2>&1; then
-  if [ "$ARCH" = "aarch64" ]; then ST_ASSET="starship-aarch64-unknown-linux-musl.tar.gz"; else ST_ASSET="starship-x86_64-unknown-linux-musl.tar.gz"; fi
-  curl -fsSLo /tmp/starship.tar.gz "https://github.com/starship/starship/releases/latest/download/${ST_ASSET}"
-  tar -xzf /tmp/starship.tar.gz -C /tmp starship
-  sudo install -m 755 /tmp/starship /usr/local/bin/starship
-  rm -f /tmp/starship.tar.gz /tmp/starship
+  mkdir -p "$HOME/.local/bin"
+  curl -sS https://starship.rs/install.sh | sh -s -- -y --bin-dir "$HOME/.local/bin"
 fi
 
 echo "==> Installing lazygit"
@@ -114,7 +111,7 @@ echo "==> Installing TPM plugins non-interactively"
 
 echo "==> Setting zsh as default shell"
 if [ "$SHELL" != "$(command -v zsh)" ]; then
-  chsh -s "$(command -v zsh)" || echo "  (chsh failed — run 'chsh -s \$(command -v zsh)' manually, may need password)"
+  sudo chsh -s "$(command -v zsh)" "$USER" || chsh -s "$(command -v zsh)" || echo "  (chsh failed — run 'chsh -s \$(command -v zsh)' manually, may need password)"
 fi
 
 echo "==> Done. Log out/in (or 'exec zsh') to pick up the new shell."
